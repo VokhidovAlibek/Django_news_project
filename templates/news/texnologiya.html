@@ -1,0 +1,44 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} Texnologiya yangiliklari {% endblock title %}
+
+{% block content %}
+      <section id="contentSection">
+            <div class="row">
+              <div class="col">
+                <div class="left_content">
+                  <div class="single_page">
+                    <ol class="breadcrumb">
+                      <li><a href="{% url 'about_page' %}">Home</a></li>
+                      <li><a href="#">Texnologiya</a></li>
+                    </ol>
+                    {% for texno in texno_yangiliklar %}
+
+                      <div class="post_commentbox"> <a href="#"><i class="fa fa-user"></i>Muallif</a> <span><i class="fa fa-calendar"></i>{{ texno.publish_time}}</span> <a href="#"><i class="fa fa-tags"></i>Technology</a> </div>
+
+                        <a href="{{ texno.get_absolute_url }}"><h1><b>{{ texno.title}}</b></h1></a>
+
+                        <div class="single_page_content"> <a href="{{ texno.get_absolute_url }}"><img style="width: 40%" class="img-center" src="{{ texno.image.url }}" alt=""></a>
+
+                             <blockquote> {{ texno.body | truncatewords:100 }} </blockquote>
+
+                        </div>
+
+                    {% endfor %}
+                            <div class="social_link">
+                              <ul class="sociallink_nav">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                              </ul>
+                            </div>
+
+                        </div>
+                </div>
+              </div>
+            </div>
+      </section>
+{% endblock content %}

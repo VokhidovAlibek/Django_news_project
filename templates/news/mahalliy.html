@@ -1,0 +1,44 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} Mahalliy yangiliklar {% endblock title %}
+
+{% block content %}
+     <section id="contentSection">
+            <div class="row">
+              <div class="col">
+                <div class="left_content">
+                  <div class="single_page">
+                    <ol class="breadcrumb">
+                      <li><a href="{% url 'about_page' %}">Home</a></li>
+                      <li><a href="#">Mahalliy</a></li>
+                    </ol>
+                    {% for mahalliy in mahalliy_yangiliklar %}
+
+                      <div class="post_commentbox"> <a href="#"><i class="fa fa-user"></i>Muallif</a> <span><i class="fa fa-calendar"></i>{{ mahalliy.publish_time}}</span> <a href="#"><i class="fa fa-tags"></i>Technology</a> </div>
+
+                        <a href="{{ mahalliy.get_absolute_url }}"><h1><b>{{ mahalliy.title}}</b></h1></a>
+
+                        <div class="single_page_content"> <a href="{{ mahalliy.get_absolute_url }}"><img style="width: 40%" class="img-center" src="{{ mahalliy.image.url }}" alt=""></a>
+
+                             <blockquote> {{ mahalliy.body | truncatewords:100 }} </blockquote>
+
+                        </div>
+
+                    {% endfor %}
+                            <div class="social_link">
+                              <ul class="sociallink_nav">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                              </ul>
+                            </div>
+
+                        </div>
+                </div>
+              </div>
+            </div>
+      </section>
+{% endblock content %}
