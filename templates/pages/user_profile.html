@@ -1,0 +1,30 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} Foydalanuvchi profili {% endblock title %}
+
+{% block content %}
+    <h3>Xush kelibsiz, {{ user.username }}</h3>
+    <h2><a href="{% url 'logout' %}" style="color: red">Chiqish</a></h2>
+    <h2 class="text-center" style="margin-bottom: 40px">Siz haqingizdagi ma'lumotlar:</h2>
+
+   <div style="display: flex; justify-content: space-around ">
+    <div style="width: 30%">
+        <img src="{{ profile.photo.url }}" width="100%" style="margin-bottom:20px "><br>
+    </div>
+
+   <div style="display: inline-block">
+    <label>Username:</label> <input value="{{ user.username }} " readonly placeholder="Kiritlmagan"><br>
+    <label>Emailingiz:</label> <input value="{{ user.email }} " readonly placeholder="Kiritlmagan"><br>
+    <label>Ismingiz:</label> <input value="{{ user.first_name }} " readonly placeholder="Kiritlmagan"><br>
+    <label>Familiyangiz:</label> <input value="{{ user.last_name }} " readonly placeholder="Kiritlmagan"><br>
+    <label>Tug'ilgan kun:</label> <input value="{{ profile.date_of_birth }} " readonly placeholder="Kiritlmagan"><br>
+   </div>
+
+   </div>
+
+    <div style="display: flex; justify-content: end">
+    <h4 ><a class="text-warning" href="{% url 'password_change' %}">Parolni almashtirish</a></h4>
+    <h3 ><a class="text-primary" href="{% url 'profile_edit' %}">Profilni tahrirlash</a></h3>
+    </div>
+{% endblock content %}

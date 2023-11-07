@@ -35,16 +35,25 @@
               <li><a href="{% url 'home_page' %}">Home</a></li>
               <li><a href="{% url 'about_page' %}">About</a></li>
               <li><a href="{% url 'contact_page' %}">Contact</a></li>
+                {% if request.user.is_superuser %}
+                     <li><a href="{% url 'admin_page' %}">Admin</a></li>
+                {% endif %}
             </ul>
           </div>
           <div class="header_top_right">
-            <p>{% now 'jS F Y H:i' %}</p>
+                  {% if request.user.is_authenticated %}
+                      <p><a href="{% url 'logout' %}" style="color: red">Exit</a></p>
+                      <p><a href="{% url 'user_profile' %}" style="color: orange">My Profile</a></p>
+                  {% else %}
+                      <p><a href="{% url 'login' %}" style="color: orange">Saytga kirish</a></p>
+                  {% endif %}
+                <p>{% now 'jS F Y H:i' %}</p>
           </div>
         </div>
       </div>
       <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="header_bottom">
-          <div class="logo_area"><a href="{% url 'home_page' %}" class="logo"><img src="{% static 'images/logo.jpg' %}" alt=""></a></div>
+          <div class="logo_area"><a href="{% url 'home_page' %}" class="logo">KunUz</a></div>
           <div class="add_banner"><a href="#"><img src="{% static 'images/addbanner_728x90_V1.jpg' %}" alt=""></a></div>
         </div>
       </div>
@@ -64,7 +73,13 @@
           <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
           <li><a href="{% url 'contact_page' %}">Biz bilan Aloqa</a></li>
           <li><a href="{% url 'page_404' %}">404 Page</a></li>
+
         </ul>
+           <li style="display: inline-block; margin-left: 250px; margin-top: 8px" >
+                <form style="display: inline-block" method="get" action="{% url 'search_results' %}">{% csrf_token %}
+                    <input class="form-control" style="margin-left: auto" type="search" name="q" placeholder="Qidiruv...">
+                </form>
+            </li>
       </div>
     </nav>
   </section>
@@ -136,6 +151,7 @@
 
 
 {% block javascript %}
+
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/wow.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

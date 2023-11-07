@@ -1,0 +1,25 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %} Admin sahifasi {% endblock %}
+
+{% block content %}
+    <h1>Admin sahifasi</h1>
+    <h3>Barcha adminlar</h3>
+    <table class="table table-bordered table-responsive table-striped">
+        <tr >
+            <th class="text-center">Username</th>
+            <th class="text-center">Ismi</th>
+            <th class="text-center">Familiyasi</th>
+            <th class="text-center">Tug'ilgan yili</th>
+        </tr>
+        {% for user in admin_users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

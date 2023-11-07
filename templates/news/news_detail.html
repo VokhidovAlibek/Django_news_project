@@ -1,5 +1,6 @@
 {% extends 'news/base.html' %}
 {% load static %}
+{% load hitcount_tags %}
 
 {% block title %} Batafsil {% endblock title %}
 
@@ -15,17 +16,59 @@
                          <li><a href="#">Batafsil</a></li>
                     </ol>
 
-                      <div class="post_commentbox"> <a href="#"><i class="fa fa-user"></i>Muallif</a> <span><i class="fa fa-calendar"></i>{{ news.publish_time}}</span> <a href="#"><i class="fa fa-tags"></i>{{ news.category }}</a> </div>
+                      <div class="post_commentbox"> <a href="#"><i class="fa fa-user"></i>Muallif</a> <span><i class="fa fa-calendar"></i>{{ news.publish_time}}</span> <a href="#"><i class="fa fa-tags"></i>{{ news.category }}</a>
+                      <a >
+                          <i class="fa fa-eye"> {% get_hit_count for news %}</i>
+                      </a>
+                      </div>
 
                         <h1><b>{{ news.title}}</b></h1>
 
                         <div class="single_page_content "> <img class="img-center " style="width: 70%; height:500px" src="{{ news.image.url }}" alt="">
 
                              <blockquote> {{ news.body }} </blockquote>
+                        {% if request.user.is_authenticated and request.user.is_superuser %}
+                            <div class="card-footer text-center">
+                                <a class="btn btn-info" href="{% url 'news_edit' news.slug %}">Tahrirlash</a>
+                                <a class="btn btn-danger" href="{% url 'news_delete' news.slug %} ">O'chirish</a>
+                            </div>
+                        {% endif %}<br>
+
+
+                             <h3>Izohlar soni: {{ comment_count }}</h3>
+                        {% for comment in comments %}
+
+                            <div class="comments" style="padding: 10px">
+                                <p class="font-weight_bold">
+                                    {{ comment.user }}
+
+                                <span class="text-muted font-weight-normal">
+                                    {{ comment.created_time }}
+                                </span>
+                                </p>
+                            {{ comment.body | linebreaks }}
+                            </div>
+                        {% endfor %}
+
+                        {% if user.is_authenticated %}
+                        <div class="col-md-8 card mb-4 mt-3">
+                            <div class="card-body">
+                                <h3>Izoh qoldirish</h3>
+                                <form method="post" style="margin-top: 1.3em">{% csrf_token %}
+                                    {{ comment_form.as_p }}
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        Yuborish
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div>
+                            <h4>Izoh qoldirish uchun saytga <a href="{% url 'login' %}" class="text-primary">kiring</a></h4>
+                        </div>
+                        {% endif %}
 
                         </div>
-
-
                             <div class="social_link">
                               <ul class="sociallink_nav">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
