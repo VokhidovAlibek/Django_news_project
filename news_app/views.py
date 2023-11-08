@@ -191,7 +191,7 @@ class NewsDeleteView(OnlyLoggedSuperUser, DeleteView):
 class NewsCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     model = News
     template_name = 'crud/news_create.html'
-    fields = ('title','slug','image','body','category','status')
+    fields = ('title', 'title_uz', 'title_ru', 'title_en','slug','image','body','body_uz','body_ru','body_en','category','status')
     # success_url = reverse_lazy('home_page')
     prepopulated_fields = {'slug': ('title',)}
 

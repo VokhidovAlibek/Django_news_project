@@ -8,6 +8,10 @@ django = "*"
 pillow = "*"
 django-bootstrap5 = "*"
 django-hitcount = "*"
+django-modeltranslation = "*"
+python-gettext = "*"
+python-decouple = "*"
+whitenoise = "*"
 
 [dev-packages]
 

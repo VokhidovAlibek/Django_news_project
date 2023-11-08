@@ -1,8 +1,12 @@
 {% extends 'news/base.html' %}
 {% load static %}
 {% load hitcount_tags %}
+{% load i18n %}
 
-{% block title %} Bosh sahifa {% endblock title %}
+
+{% block title %}{% blocktrans %}
+
+ Bosh sahifa {% endblocktrans %}{% endblock title %}
 {% block content %}
 
   <section id="sliderSection">
@@ -22,7 +26,7 @@
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4">
         <div class="latest_post">
-          <h2><span>So'nggi yangiliklar</span></h2>
+          <h2><span>{% blocktrans %}So'nggi yangiliklar{% endblocktrans %}</span></h2>
           <div class="latest_post_container">
             <div id="prev-button"><i class="fa fa-chevron-up"></i></div>
             <ul class="latest_postnav">
@@ -46,7 +50,7 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="left_content">
           <div class="single_post_content">
-            <h2><span>Mahalliy</span></h2>
+            <h2><span>{% blocktrans %}Mahalliy{% endblocktrans %}</span></h2>
             <div class="single_post_content_left">
               <ul class="business_catgnav  wow fadeInDown">
 
@@ -81,7 +85,7 @@
           <div class="fashion_technology_area">
             <div class="fashion">
               <div class="single_post_content">
-                <h2><span>Horij yangiliklari</span></h2>
+                <h2><span>{% blocktrans %}Horij yangiliklari{% endblocktrans %}</span></h2>
 
                     {% for horij in horij_news%}
                         <ul class="business_catgnav wow fadeInDown">
@@ -109,7 +113,7 @@
             </div>
             <div class="technology">
               <div class="single_post_content">
-                <h2><span>Texnologiya</span></h2>
+                <h2><span>{% blocktrans %}Texnologiya{% endblocktrans %}</span></h2>
 
                   {% for texno in texnoligiya_news %}
                       {% if forloop.first %}
@@ -207,7 +211,7 @@
       <div class="col-lg-4 col-md-4 col-sm-4">
         <aside class="right_content">
           <div class="single_sidebar">
-            <h2><span>Ommabop</span></h2>
+            <h2><span>{% blocktrans %}Ommabop{% endblocktrans %}</span></h2>
             <ul class="spost_nav">
               <li>
                 <div class="media wow fadeInDown"> <a href="{% url 'about_page' %}" class="media-left"> <img alt="" src="{% static 'images/post_img1.jpg' %}"> </a>
@@ -280,9 +284,9 @@
             <h2><span>Sponsor</span></h2>
             <a class="sideAdd" href="#"><img src="{% static 'images/add_img.jpg' %}" alt=""></a> </div>
           <div class="single_sidebar wow fadeInDown">
-            <h2><span>Kategoriyalar</span></h2>
+            <h2><span>{% blocktrans %}Kategoriyalar{% endblocktrans %}</span></h2>
             <select class="catgArchive">
-              <option>Kategoriyani tanlang</option>
+              <option>{% blocktrans %}Kategoriyani tanlang{% endblocktrans %}</option>
                 {% for category in categories %}
                     <option>{{ category.name}}</option>
                 {% endfor %}
